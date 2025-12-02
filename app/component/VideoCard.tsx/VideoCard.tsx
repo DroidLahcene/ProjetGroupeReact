@@ -26,7 +26,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
             className={`border border-gray-200 rounded-lg overflow-hidden shadow-md 
                         w-full hover:shadow-lg transition-shadow duration-200`}
         >
-            <Link to={`Desktop/${video.id}`}>
+            <Link to={`/Desktop/${video.id}`}>
                 
       
                 <div className={`relative ${aspectRatioClass}`}>
@@ -46,6 +46,62 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
                     {video.titre}
                 </h3>
                 
+                {!isVerticale && (
+                    <>
+                        {/* Affiche Durée et Description seulement pour les classiques */}
+                        <p className="text-sm text-gray-600 my-1">
+                            Durée : {video.duree} secondes 
+                        </p>
+                        {/* Utilisation de "line-clamp-2" pour limiter la description à deux lignes */}
+                        <p className="text-xs text-gray-700 mt-2 line-clamp-2">
+                            {video.description}
+                        </p>
+                    </>
+                )}
+            </div>
+        </article>
+    );
+};
+
+
+
+export const ShortVideoCard: React.FC<VideoCardProps> = ({ video }) => {
+    
+    const isVerticale = video.categorie === 'verticale';
+    
+    // Détermine la classe de ratio Tailwind à utiliser
+    // Si votre Tailwind est configuré : aspect-9/16 pour verticale, aspect-video (16/9) pour classique.
+    // Si votre Tailwind n'est pas configuré pour 9/16, vous devrez utiliser une classe personnalisée ou une hauteur fixe.
+    const aspectRatioClass = isVerticale ? 'aspect-9/16' : 'aspect-video';
+
+    return (
+        // Remplacement de style={} par className="..."
+        <article 
+            key={video.id} 
+            className={`border border-gray-200 rounded-lg overflow-hidden shadow-md 
+                        w-full hover:shadow-lg max-w-[50vh] transition-shadow duration-200`}
+        >
+            
+                
+      
+                <div className={`relative ${aspectRatioClass}`}>
+                    <iframe
+                        src={`../../../assets/videos/${video.lien}`}
+                        title={video.titre}
+                        className="w-full h-full border-0"
+                        allowFullScreen
+                    ></iframe>
+                </div>
+                
+           
+            
+            <div className="p-3">
+                {/* Affichage du Titre */}
+                <Link to={`/Desktop/${video.id}`}>
+                <h3 className="text-base text-center font-semibold leading-tight mb-1 truncate">
+                    {video.titre}
+                </h3>
+                 </Link>
                 {!isVerticale && (
                     <>
                         {/* Affiche Durée et Description seulement pour les classiques */}

@@ -19,7 +19,7 @@ export default function MainNav() {
                 </li>
 
                 <li className="px-2 font-bold text-2xl">
-                    <NavLink to="/Desktop">
+                    <NavLink to="/Desktop/none">
                         Desktop
                     </NavLink>
 

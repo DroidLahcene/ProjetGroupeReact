@@ -16,24 +16,25 @@ export default function Visualisation() {
     const videoId = parseInt(id, 10);
 
     // Si la conversion échoue (ex: ID="abc"), parseInt retourne NaN.
-   /*  if (isNaN(videoId)) {
-        console.error(`ID non numérique trouvé: ${id}. Redirection.`);
-        return <Navigate to="/Mobile" replace />;
-    } */
+    /*  if (isNaN(videoId)) {
+         console.error(`ID non numérique trouvé: ${id}. Redirection.`);
+         return <Navigate to="/Mobile" replace />;
+     } */
 
     // 4. Utiliser le contexte pour trouver la vidéo
     const { videos, loading } = useContext(VideoContext);
-    console.log('Type de videoId (URL):', typeof videoId, 'Valeur:', videoId);
-    console.log('Type de v.id (Array):', typeof videos[0]?.id, 'Valeur:', videos[0]?.id);
+    console.log(videos)
+
     // ✅ RECHERCHE PAR ID (NUMBER) : C'est la méthode la plus sûre
     const video = videos.find(v => v.id === videoId);
+    console.log('Type de videoId (URL):', typeof videoId, 'Valeur:', videoId);
+    console.log('Type de v.id (Array):', typeof videos[0]?.id, 'Valeur:', videos[0]?.id);
 
 
 
 
 
-
-    if (loading || videos.length === 0) { 
+    if (loading || videos.length === 0) {
         return <div className="text-center p-8 text-lg font-semibold">Chargement des données vidéos...</div>;
     }
 
