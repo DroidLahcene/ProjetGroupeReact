@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { VideoContext, type Video } from '@/contexts/VideoAPI/VideoContext'; 
+import { VideoContext, type Video } from '@/contexts/VideoAPI/VideoContext';
 import { VideoCard } from '../VideoCard.tsx/VideoCard';
 
 export function VideoList() {
-    
+
     const { videos, loading, error } = useContext(VideoContext);
 
     //Si c'est encore entrain de charger et que aucune vide est dispo 
@@ -14,7 +14,7 @@ export function VideoList() {
             </div>
         );
     }
-    
+
     //Si ya une erreur on affiche l'erreur
     if (error) {
         return (
@@ -27,23 +27,30 @@ export function VideoList() {
 
     //sinon ya des données du coup on affiche les données
     return (
-        <div style={{ maxWidth: '1200px', margin: '20px auto', padding: '0 20px' }}>
-            <h2>Les 30 Vidéos Récupérées ({videos.length} éléments)</h2>
-            <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-                gap: '20px' 
-            }}>
-                {videos.map((video: Video) => (
-                    <VideoCard key={video.id} video={video} cardWidth='100%' />
-                ))}
+        <div className="max-w-7xl mx-auto px-4 py-6">
+            <h2 className="text-2xl font-bold mb-6">Vidéos Classiques</h2>
+
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {videos
+                    .filter(v => v.categorie === 'classique')
+                    .map((video: Video) => (
+                        // La carte prend automatiquement la taille définie par la grille
+                        // 'col-span-1' n'est pas nécessaire ici car elle est implicite
+                        <VideoCard key={video.id} video={video} />
+                    ))}
+            </div>
+
+            <h2 className="text-2xl font-bold mt-12 mb-6">Shorts</h2>
+            <div className="grid  grid-cols-2  sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-x-6   gap-y-10  pb-4">
+                {videos
+                    .filter(v => v.categorie === 'verticale')
+                    .map((video: Video) => (
+                        // On retire la classe w-48 et flex-shrink-0 : 
+                        // La grille gère la largeur automatiquement et uniformément
+                        <VideoCard key={video.id} video={video} />
+                    ))}
             </div>
         </div>
     );
 }
-/* {videos
-    .filter(v => v.categorie === 'classique')
-    .map(video => (
-        // Nous définissons une largeur de 30% ou 400px
-        <VideoCard key={video.id} video={video} cardWidth="30%" /> 
-    ))} */

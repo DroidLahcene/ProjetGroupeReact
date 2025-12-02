@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import type { Video } from '@/contexts/VideoAPI/VideoContext'; 
 
 interface VideoCardProps {
@@ -25,7 +26,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
             className={`border border-gray-200 rounded-lg overflow-hidden shadow-md 
                         w-full hover:shadow-lg transition-shadow duration-200`}
         >
-            <a href={`../../../assets/videos/${video.lien}`} target="_blank" rel="noopener noreferrer">
+            <Link to={`Desktop/${video.id}`}>
                 
       
                 <div className={`relative ${aspectRatioClass}`}>
@@ -37,7 +38,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
                     />
                 </div>
                 
-            </a>
+            </Link>
             
             <div className="p-3">
                 {/* Affichage du Titre */}

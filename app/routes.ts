@@ -5,8 +5,8 @@ export default [
 
     index("routes/home.tsx"),
     route("playlist", "routes/playlist.tsx"),
-    route("Desktop", "routes/visuDesk.tsx"),
-    route("Mobile", "routes/visuPhone.tsx"),
+    route("Desktop/:id", "routes/visuDesk.tsx"),
+    route("Mobile/:id", "routes/visuPhone.tsx"),
 
 
 
